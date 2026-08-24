@@ -36,7 +36,7 @@ Passing the tests is only half of what a specification asks for. A problem state
 
 ## ✨ About SLICE
 <p align="center">
-  <img src="figures/overview.png" alt="SLICE pipeline overview" width="100%">
+  <img src="figures/overview-new.png" alt="SLICE pipeline overview" width="100%">
 </p>
 
 
