@@ -38,7 +38,7 @@ def _is_contract(p: str) -> bool:
 def mask_contract(text: str) -> str:
     """Drop input-precondition clauses; keep functionality, rules, doctest examples, code.
     Safety: never drop numbered/bulleted rule lines; if a line loses >55% of its chars, keep the
-    original (over-masking guard) so functional specs aren't destroyed."""
+    original (over-masking safeguard) so functional specs aren't destroyed."""
     if not text:
         return text
     out = []
@@ -53,7 +53,7 @@ def mask_contract(text: str) -> str:
         rebuilt = " ".join(x for x in kept if x.strip())
         rebuilt = re.sub(r"\s*;\s*", "; ", rebuilt)
         rebuilt = re.sub(r"\s{2,}", " ", rebuilt).replace(" ;", ";").strip()
-        # over-masking guard: if the line was gutted, keep the original prose line
+        # over-masking safeguard: if the line was gutted, keep the original prose line
         if rebuilt and len(rebuilt) < 0.45 * len(ln.strip()):
             out.append(ln); continue
         out.append(("    " + rebuilt) if (ln.startswith("    ") and rebuilt) else rebuilt)

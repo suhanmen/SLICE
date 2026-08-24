@@ -5,6 +5,9 @@
            entangle  segment  -> FUNC, when the segment carries a functional role
     rule   remove a segment iff it has an anchor edge and no entangle edge
 
+Paper terminology: the `anchor` edge is the contract-grounding edge; an `entangled` segment is
+one carrying a functional or example-preservation label. The internal names predate the paper.
+
 `entangle` is deliberately not similarity-based. A contract restates the description's own
 vocabulary, so a lexical criterion would protect exactly the segments that should be removed;
 the edge therefore keys on behavioural-role cues (functional markers, numbered/bulleted lines).

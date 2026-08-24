@@ -13,7 +13,7 @@
 </p>
 
 <div align="center">
-    <a href="https://arxiv.org/abs/2605.27981"><b>Paper Link</b>📖</a>
+    <a href="https://arxiv.org/abs/xxxx.xxxx"><b>Paper Link</b>📖</a>
 </div><br>
 
 ## 📰 News

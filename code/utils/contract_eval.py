@@ -365,27 +365,27 @@ class _RmChecks(_ast.NodeTransformer):
 
 
 def _strip_leading_guards(body):
-    """Drop a function's ENTRY-REGION validation guards (leading asserts + if/for/while guards),
+    """Drop a function's ENTRY-REGION input-validation code (leading asserts + if/for/while checks),
     keeping a leading docstring and everything from the first PRODUCTIVE statement on. This
     preserves a FUNCTIONAL `raise`/`assert` used as algorithm logic (e.g. `raise ValueError('no
     repeat')` at the end of a function, or a broken assert that is not a contract) — those are
-    not entry guards, so they stay. Contract validation lives at the function entry, so
-    leading-guard removal targets exactly that."""
+    not entry validation, so they stay. Contract validation lives at the function entry, so
+    removing the leading validation statements targets exactly that."""
     out, stripping = [], True
     for i, s in enumerate(body):
         if (i == 0 and isinstance(s, _ast.Expr) and isinstance(getattr(s, "value", None), _ast.Constant)
                 and isinstance(s.value.value, str)):
             out.append(s); continue                      # keep leading docstring
         if stripping and (isinstance(s, _ast.Assert) or _is_guard(s)):
-            continue                                     # entry-region contract guard -> drop
+            continue                                     # entry-region validation statement -> drop
         stripping = False                                # first productive stmt -> keep the rest
         out.append(s)
     return out or [_ast.Pass()]
 
 
 def strip_checks(code: str) -> str:
-    """BODY-ONLY: remove the ENTRY-REGION input-validation guards (leading asserts + if/for/while
-    guards) from every function; keep everything from the first productive statement on. Unlike a
+    """BODY-ONLY: remove the ENTRY-REGION input-validation code (leading asserts + if/for/while
+    checks) from every function; keep everything from the first productive statement on. Unlike a
     blanket assert/raise delete, this preserves a FUNCTIONAL `raise` used as body logic (so the
     body's real correctness is measured, not an artificially 'fixed' body). Falls back to a line
     filter if the code doesn't parse."""

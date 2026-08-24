@@ -2,6 +2,7 @@
 
     anchored = MODAL and cos(segment, condition) >= TAU and content-word overlap >= FLOOR
     removed  = anchored and not entangled   (entangled = functional-role marker or numbered line)
+    # paper terms: anchored = has a contract-grounding edge; entangled = functional/example label
 
     CUDA_VISIBLE_DEVICES=0 PYTHONPATH=code python code/utils/functional_view.py <model> [setting]
 
