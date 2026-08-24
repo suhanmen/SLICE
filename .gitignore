@@ -1,0 +1,18 @@
+# Everything a run generates
+output/
+evaluation/
+
+# Expected-output cache: 1.6 GB, rebuilt automatically on the first scoring run
+dataset/contracteval/inspect_output_pair.json
+
+# Rebuilt by scripts/build_artifacts.sh; the reports are byproducts of the generators
+artifacts/spec_graphs.json
+artifacts/graph_mask_report.md
+artifacts/split_report.md
+artifacts/condition_specs_new.json
+
+__pycache__/
+*.py[cod]
+*.log
+*.env
+.DS_Store
