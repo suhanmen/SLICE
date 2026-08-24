@@ -1,6 +1,20 @@
 # SLICE: Specification-Level Isolation of Contract Enforcement
 
-**[Paper Link**📖](https://arxiv.org/abs/XXX.XXX)
+<p align="center">
+  <a href="https://github.com/suhanmen/SLICE/stargazers">
+    <img src="https://img.shields.io/github/stars/suhanmen/SLICE?style=social" alt="GitHub Repo stars">
+  </a>
+  <a href="https://github.com/suhanmen/SLICE/commits/main">
+    <img src="https://img.shields.io/github/last-commit/suhanmen/SLICE" alt="GitHub last commit">
+  </a>
+  <a href="https://github.com/suhanmen/SLICE/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/suhanmen/SLICE?color=orange" alt="GitHub contributors">
+  </a>
+</p>
+
+<div align="center">
+    <a href="https://arxiv.org/abs/2605.27981"><b>Paper Link</b>📖</a>
+</div><br>
 
 ## 📰 News
 
@@ -21,6 +35,11 @@
 Passing the tests is only half of what a specification asks for. A problem statement usually also says what the *inputs* must satisfy — "the list must be non-empty", "n must be a positive integer" — and a solution that computes the right answer but accepts an invalid input has not implemented the specification. Asking a model for both in one undivided generation — no decomposition of the specification — makes the two requirements compete: assertions drift into the function body, the implementation bends around them, and a single over-strict assertion silently rejects inputs the problem calls valid. **SLICE** asks the two questions separately, and lets each one be checked on its own terms.
 
 ## ✨ About SLICE
+<p align="center">
+  <img src="figures/overview.png" alt="SLICE pipeline overview" width="100%">
+</p>
+
+
 
 **SLICE** (**S**pecification-**L**evel **I**solation of **C**ontract **E**nforcement) generates a function body and its input-validation assertions through separate generation stages, taking only the natural-language problem description as input — no reference solution, no held-out test.
 
