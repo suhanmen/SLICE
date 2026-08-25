@@ -237,7 +237,7 @@ SLICE/
 ## 🔖 Citation
 
 ```bibtex
-@misc{slice2026,
+@misc{lim2026slicespecificationlevelisolationcontract,
       title={SLICE: Specification-Level Isolation of Contract Enforcement},
       author={Soohan Lim and Hyundong Jin and Yo-Sub Han},
       year={2026},
