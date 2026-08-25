@@ -13,7 +13,7 @@
 </p>
 
 <div align="center">
-    <a href="https://arxiv.org/abs/xxxx.xxxx"><b>Paper Link</b>📖</a>
+    <a href="https://arxiv.org/abs/2608.21483"><b>Paper Link</b>📖</a>
 </div><br>
 
 ## 📰 News
@@ -241,10 +241,10 @@ SLICE/
       title={SLICE: Specification-Level Isolation of Contract Enforcement},
       author={Soohan Lim and Hyundong Jin and Yo-Sub Han},
       year={2026},
-      eprint={XXXX.XXXXX},
+      eprint={2608.21483},
       archivePrefix={arXiv},
       primaryClass={cs.SE},
-      url={https://arxiv.org/abs/XXXX.XXXXX},
+      url={https://arxiv.org/abs/2608.21483},
 }
 ```
 

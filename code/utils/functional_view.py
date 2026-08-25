@@ -137,26 +137,30 @@ def gold_set(tid, task):
 
 sgm.build_graph = build_graph_hyb
 
-S = sys.argv[1]
-TAG = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_SETTING
-cl = json.load(open(run_path(TAG, S, "conditions")))
-TASKS = {str(t["id"]): t for t in json.load(open("dataset/contracteval/test.json"))}
-FROZEN = json.load(open("dataset/contracteval/eval_tasks_340.json"))["ids"]
-cls = lambda v: v if isinstance(v, list) else v.get("clauses", [])
 
-tp = nr = ng = 0                                    # |removed & gold|, |removed|, |gold|
-out_view = {}
-for tid in FROZEN:
-    t = dict(TASKS[tid])
-    G = gold_set(tid, TASKS[tid])
-    # the graph anchors against the model's own conditions, never the reference contract
-    t["spec_text"] = "\n".join(map(str, cls(cl.get(tid, [])))) + "\n" + (t.get("signature") or "")
-    masked, removed, _, _ = sgm.graph_mask(t)
-    out_view[tid] = {"masked": masked, "removed_segments": removed}
-    R = set(x.strip() for x in removed)
-    tp += len(R & G); nr += len(R); ng += len(G)
-out_path = run_path(TAG, S, "view")
-json.dump(out_view, open(out_path, "w"), indent=1)
-print(f"[view] {S}: {len(out_view)} tasks -> {out_path}", flush=True)
-print(f"[view] {S}: precision {tp}/{nr} = {tp/max(nr,1)*100:5.1f}% | "
-      f"recall {tp}/{ng} = {tp/max(ng,1)*100:5.1f}%  (vs gold proxy)", flush=True)
+def main(S, TAG=DEFAULT_SETTING):
+    cl = json.load(open(run_path(TAG, S, "conditions")))
+    TASKS = {str(t["id"]): t for t in json.load(open("dataset/contracteval/test.json"))}
+    FROZEN = json.load(open("dataset/contracteval/eval_tasks_340.json"))["ids"]
+    cls = lambda v: v if isinstance(v, list) else v.get("clauses", [])
+
+    tp = nr = ng = 0                                # |removed & gold|, |removed|, |gold|
+    out_view = {}
+    for tid in FROZEN:
+        t = dict(TASKS[tid])
+        G = gold_set(tid, TASKS[tid])
+        # the graph anchors against the model's own conditions, never the reference contract
+        t["spec_text"] = "\n".join(map(str, cls(cl.get(tid, [])))) + "\n" + (t.get("signature") or "")
+        masked, removed, _, _ = sgm.graph_mask(t)
+        out_view[tid] = {"masked": masked, "removed_segments": removed}
+        R = set(x.strip() for x in removed)
+        tp += len(R & G); nr += len(R); ng += len(G)
+    out_path = run_path(TAG, S, "view")
+    json.dump(out_view, open(out_path, "w"), indent=1)
+    print(f"[view] {S}: {len(out_view)} tasks -> {out_path}", flush=True)
+    print(f"[view] {S}: precision {tp}/{nr} = {tp/max(nr,1)*100:5.1f}% | "
+          f"recall {tp}/{ng} = {tp/max(ng,1)*100:5.1f}%  (vs gold proxy)", flush=True)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1], *sys.argv[2:3])
